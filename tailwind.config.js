@@ -9,7 +9,9 @@ module.exports = {
     extend: {
       colors: {
         primary: 'hsl(240 80% 50%)',
+        'primary-hover': 'hsl(240 80% 42%)',
         accent: 'hsl(180 70% 55%)',
+        'accent-hover': 'hsl(180 70% 48%)',
         bg: 'hsl(220 20% 95%)',
         surface: 'hsl(220 15% 90%)',
         'dream-blue': 'hsl(220 60% 60%)',

@@ -1,10 +1,22 @@
 import OpenAI from 'openai';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY,
-  baseURL: "https://openrouter.ai/api/v1",
-  dangerouslyAllowBrowser: true,
-});
+let openai: OpenAI | null = null;
+
+function getOpenAIClient(): OpenAI {
+  if (!openai) {
+    const apiKey = process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
+    if (!apiKey) {
+      throw new Error('OpenAI API key is required. Please set OPENAI_API_KEY or OPENROUTER_API_KEY environment variable.');
+    }
+    
+    openai = new OpenAI({
+      apiKey,
+      baseURL: "https://openrouter.ai/api/v1",
+      dangerouslyAllowBrowser: true,
+    });
+  }
+  return openai;
+}
 
 export async function interpretDream(dreamDescription: string, moodTags: string[] = []): Promise<string> {
   try {
@@ -23,7 +35,8 @@ Please provide:
 
 Keep the response concise but insightful (200-300 words).`;
 
-    const completion = await openai.chat.completions.create({
+    const client = getOpenAIClient();
+    const completion = await client.chat.completions.create({
       model: 'google/gemini-2.0-flash-001',
       messages: [
         {
@@ -63,7 +76,8 @@ Please identify:
 
 Keep the analysis insightful and supportive (250-350 words).`;
 
-    const completion = await openai.chat.completions.create({
+    const client = getOpenAIClient();
+    const completion = await client.chat.completions.create({
       model: 'google/gemini-2.0-flash-001',
       messages: [
         {
