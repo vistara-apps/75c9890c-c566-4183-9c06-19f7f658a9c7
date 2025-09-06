@@ -7,6 +7,8 @@ import { DreamListItem } from '@/components/DreamListItem';
 import { InterpretationCard } from '@/components/InterpretationCard';
 import { ThemeCard } from '@/components/ThemeCard';
 import { WalletConnect } from '@/components/WalletConnect';
+import { PremiumInterpretation } from '@/components/PremiumInterpretation';
+import { PremiumPatternAnalysis } from '@/components/PremiumPatternAnalysis';
 import { interpretDream, analyzePatterns } from '@/lib/openai';
 import { saveDream, getDreams, generateId } from '@/lib/utils';
 import { Moon, Brain, TrendingUp, Sparkles, Plus, History } from 'lucide-react';
@@ -161,7 +163,17 @@ export default function DreamWeaverApp() {
           >
             ← Back to Dreams
           </button>
-          <InterpretationCard dream={selectedDream} />
+          <div className="space-y-6">
+            <InterpretationCard dream={selectedDream} />
+            <PremiumInterpretation 
+              dreamDescription={selectedDream.description}
+              moodTags={selectedDream.moodTags}
+              onInterpretationComplete={(interpretation, transactionHash) => {
+                console.log('Premium interpretation completed:', { interpretation, transactionHash });
+                // In a real app, you might save this to the dream record
+              }}
+            />
+          </div>
         </div>
       ) : (
         <>
@@ -254,10 +266,19 @@ export default function DreamWeaverApp() {
           <p className="text-gray-300 mb-4">Click "Analyze" to discover patterns in your dreams</p>
         </div>
       ) : (
-        <div className="space-y-4">
-          {patterns.map((pattern, index) => (
-            <ThemeCard key={index} theme={pattern} />
-          ))}
+        <div className="space-y-6">
+          <PremiumPatternAnalysis 
+            dreams={dreams}
+            onAnalysisComplete={(analysis, transactionHash) => {
+              console.log('Premium pattern analysis completed:', { analysis, transactionHash });
+              // In a real app, you might save this analysis
+            }}
+          />
+          <div className="space-y-4">
+            {patterns.map((pattern, index) => (
+              <ThemeCard key={index} theme={pattern} />
+            ))}
+          </div>
         </div>
       )}
     </div>
