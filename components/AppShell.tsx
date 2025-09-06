@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { Brain, Moon, Settings2, History, TrendingUp } from 'lucide-react';
+import { Brain, Moon, Settings2, TrendingUp } from 'lucide-react';
 
 interface AppShellProps {
   children: ReactNode;

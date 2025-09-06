@@ -16,11 +16,6 @@ interface DreamListItemProps {
 }
 
 export function DreamListItem({ dream, onClick }: DreamListItemProps) {
-  const getMoodTagColor = (moodId: string) => {
-    const mood = MOOD_TAGS.find(m => m.id === moodId);
-    return mood?.color || 'bg-gray-400';
-  };
-
   return (
     <div 
       onClick={onClick}

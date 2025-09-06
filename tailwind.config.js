@@ -8,30 +8,32 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: 'hsl(240 80% 50%)',
-        accent: 'hsl(180 70% 55%)',
-        bg: 'hsl(220 20% 95%)',
-        surface: 'hsl(220 15% 90%)',
-        'dream-blue': 'hsl(220 60% 60%)',
-        'dream-purple': 'hsl(260 60% 70%)',
-        'dream-teal': 'hsl(180 70% 55%)',
-      },
-      borderRadius: {
-        'sm': '6px',
-        'md': '10px',
-        'lg': '16px',
-      },
-      spacing: {
-        'sm': '8px',
-        'md': '12px',
-        'lg': '20px',
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        // Custom colors for DreamWeaver
+        primary: {
+          DEFAULT: 'hsl(240 80% 50%)',
+          hover: 'hsl(240 80% 42%)',
+        },
+        accent: {
+          DEFAULT: 'hsl(180 70% 55%)',
+          hover: 'hsl(180 70% 48%)',
+        },
+        'dream-blue': '#3B82F6',
+        'dream-purple': '#8B5CF6',
+        'dream-teal': '#14B8A6',
+        success: 'hsl(142 76% 45%)',
+        warning: 'hsl(48 96% 53%)',
+        error: 'hsl(0 86% 59%)',
       },
       boxShadow: {
-        'card': '0 8px 24px hsla(210, 40%, 50%, 0.12)',
+        'card': '0 8px 32px hsla(220 24% 9% / 0.12)',
+        'card-hover': '0 12px 40px hsla(220 24% 9% / 0.15)',
       },
       animation: {
-        'fade-in': 'fadeIn 0.3s ease-in-out',
+        'fade-in': 'fadeIn 0.5s ease-in-out',
         'slide-up': 'slideUp 0.3s ease-out',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
         fadeIn: {
@@ -39,11 +41,11 @@ module.exports = {
           '100%': { opacity: '1' },
         },
         slideUp: {
-          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '0%': { transform: 'translateY(10px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
         },
       },
     },
   },
   plugins: [],
-};
+}
