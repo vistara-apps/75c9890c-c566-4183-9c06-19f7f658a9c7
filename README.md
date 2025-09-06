@@ -31,6 +31,7 @@ A privacy-focused dream interpretation app built for the Base ecosystem. Unlock 
    ```
    NEXT_PUBLIC_ONCHAINKIT_API_KEY=your_onchainkit_key
    OPENAI_API_KEY=your_openai_key
+   NEXT_PUBLIC_PAYMENT_RECIPIENT=0x742d35Cc6634C0532925a3b8D0C9e3e0C0e0e0e0
    ```
 
 3. **Run the development server**:
@@ -116,13 +117,35 @@ This app is designed to be deployed as a Base Mini App:
 
 3. **Configure environment variables** in your deployment platform
 
+## Premium Features (x402 Payments)
+
+DreamWeaver now supports USDC payments on Base for premium features:
+
+### 🔐 Premium Dream Interpretation ($0.10 USDC)
+- Deeper psychological analysis with enhanced AI prompts
+- Symbolic meaning exploration and archetypal connections
+- Personal growth insights and actionable recommendations
+- Life integration guidance
+
+### 📊 Premium Pattern Analysis ($0.25 USDC)
+- Advanced pattern recognition across multiple dreams
+- Subconscious trend analysis and emotional mapping
+- Personal growth indicators and life cycle connections
+- Comprehensive insights report
+
+### 💳 Payment Integration
+- **x402-axios**: Seamless USDC payments on Base
+- **wagmi + OnchainKit**: Wallet integration
+- **Transaction Verification**: Automatic confirmation handling
+- **Error Handling**: Balance checks and user-friendly error messages
+
 ## Future Enhancements
 
 - **Decentralized Storage**: IPFS integration via Pinata
-- **USDC Payments**: Micro-transactions for premium features
+- **Dream Export**: PDF reports with premium analysis ($0.05 USDC)
 - **Community Features**: Share insights (anonymously)
 - **Advanced Analytics**: Deeper pattern analysis
-- **Export Options**: PDF reports, data portability
+- **Subscription Model**: Monthly premium access
 
 ## Contributing
 
