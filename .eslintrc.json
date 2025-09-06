@@ -10,6 +10,7 @@
     "react-hooks/exhaustive-deps": "warn",
     "prefer-const": "error",
     "no-var": "error",
-    "react/no-unescaped-entities": "error"
+    "react/no-unescaped-entities": "error",
+    "@next/next/no-img-element": "off"
   }
 }
