@@ -1,0 +1,30 @@
+{
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
+  },
+  "frame": {
+    "version": "1",
+    "name": "DreamWeaver",
+    "subtitle": "Built with Zara",
+    "description": "DreamWeaver is a Base Mini App built with Zara.",
+    "iconUrl": "https://0co.to/images/zara-2.png",
+    "homeUrl": "https://75c9890cc56641839c0619f7f658a9c7-zu2z.vercel.app",
+    "splashImageUrl": "https://75c9890cc56641839c0619f7f658a9c7-zu2z.vercel.app/splash.png",
+    "splashBackgroundColor": "#000000",
+    "heroImageUrl": "https://75c9890cc56641839c0619f7f658a9c7-zu2z.vercel.app/image.png",
+    "tagline": "DreamWeaver",
+    "screenshotUrls": [
+      "https://75c9890cc56641839c0619f7f658a9c7-zu2z.vercel.app/screenshot.png",
+      "https://75c9890cc56641839c0619f7f658a9c7-zu2z.vercel.app/screenshot.png"
+    ],
+    "primaryCategory": "social",
+    "tags": [
+      "base",
+      "miniapp",
+      "onchainkit"
+    ],
+    "webhookUrl": "https://75c9890cc56641839c0619f7f658a9c7-zu2z.vercel.app/api/webhook"
+  }
+}
