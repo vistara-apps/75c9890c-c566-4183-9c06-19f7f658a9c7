@@ -32,6 +32,9 @@
   /* Focus ring */
   --focus-ring: 0 0 0 2px var(--color-accent);
   --focus-ring-offset: 2px;
+  
+  /* Border radius */
+  --radius: 0.5rem;
 }
 
 @layer base {

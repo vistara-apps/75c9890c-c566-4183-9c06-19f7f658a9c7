@@ -17,7 +17,7 @@ import { ErrorBoundary, InlineError, useErrorHandler } from '@/components/ErrorB
 import { ToastProvider, useToastActions } from '@/components/Toast';
 import { interpretDream, analyzePatterns } from '@/lib/openai';
 import { saveDream, getDreams, generateId } from '@/lib/utils';
-import { Moon, Brain, TrendingUp, Sparkles, Plus, History } from 'lucide-react';
+import { Moon, Brain, TrendingUp, Sparkles, Plus } from 'lucide-react';
 
 type ViewType = 'home' | 'dreams' | 'patterns' | 'settings';
 
@@ -92,7 +92,7 @@ function DreamWeaverAppContent() {
     toastActions.analysisStarted();
     
     try {
-      const analysis = await analyzePatterns(dreams);
+      await analyzePatterns(dreams);
       
       // Generate mock patterns based on dreams
       const mockPatterns = [

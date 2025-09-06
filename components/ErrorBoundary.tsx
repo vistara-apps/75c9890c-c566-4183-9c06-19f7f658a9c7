@@ -32,7 +32,7 @@ function DefaultErrorFallback({ error, resetError }: ErrorFallbackProps) {
         
         <h1 className="text-2xl font-bold text-white mb-4">Something went wrong</h1>
         <p className="text-gray-300 mb-6">
-          We encountered an unexpected error. Don't worry, your dreams are safe.
+          We encountered an unexpected error. Don&apos;t worry, your dreams are safe.
         </p>
         
         {process.env.NODE_ENV === 'development' && error && (
