@@ -8,13 +8,22 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: 'hsl(240 80% 50%)',
-        accent: 'hsl(180 70% 55%)',
+        primary: {
+          DEFAULT: 'hsl(240 80% 50%)',
+          hover: 'hsl(240 80% 42%)',
+        },
+        accent: {
+          DEFAULT: 'hsl(180 70% 55%)',
+          hover: 'hsl(180 70% 48%)',
+        },
         bg: 'hsl(220 20% 95%)',
         surface: 'hsl(220 15% 90%)',
         'dream-blue': 'hsl(220 60% 60%)',
         'dream-purple': 'hsl(260 60% 70%)',
         'dream-teal': 'hsl(180 70% 55%)',
+        success: 'hsl(142 76% 45%)',
+        warning: 'hsl(48 96% 53%)',
+        error: 'hsl(0 86% 59%)',
       },
       borderRadius: {
         'sm': '6px',
