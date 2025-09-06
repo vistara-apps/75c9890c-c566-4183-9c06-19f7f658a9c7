@@ -12,10 +12,12 @@ module.exports = {
           DEFAULT: 'hsl(240 80% 50%)',
           hover: 'hsl(240 80% 42%)',
         },
+        'primary-hover': 'hsl(240 80% 42%)',
         accent: {
           DEFAULT: 'hsl(180 70% 55%)',
           hover: 'hsl(180 70% 48%)',
         },
+        'accent-hover': 'hsl(180 70% 48%)',
         bg: 'hsl(220 20% 95%)',
         surface: 'hsl(220 15% 90%)',
         'dream-blue': 'hsl(220 60% 60%)',
@@ -41,6 +43,8 @@ module.exports = {
       animation: {
         'fade-in': 'fadeIn 0.3s ease-in-out',
         'slide-up': 'slideUp 0.3s ease-out',
+        'bounce-in': 'bounceIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+        'scale-in': 'scaleIn 0.2s ease-in-out',
       },
       keyframes: {
         fadeIn: {
@@ -50,6 +54,16 @@ module.exports = {
         slideUp: {
           '0%': { transform: 'translateY(20px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        bounceIn: {
+          '0%': { transform: 'scale(0.3)', opacity: '0' },
+          '50%': { transform: 'scale(1.05)' },
+          '70%': { transform: 'scale(0.9)' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+        scaleIn: {
+          '0%': { transform: 'scale(0.95)', opacity: '0' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
         },
       },
     },
