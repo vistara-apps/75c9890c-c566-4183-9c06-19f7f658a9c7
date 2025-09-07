@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:verify": "next build && node scripts/verify-build.js",
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit"
