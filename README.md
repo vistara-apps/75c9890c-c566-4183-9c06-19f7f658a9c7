@@ -1,5 +1,7 @@
 # DreamWeaver - Base Mini App
 
+✅ **Build Status: All builds passing successfully!**
+
 A privacy-focused dream interpretation app built for the Base ecosystem. Unlock the meaning of your dreams with AI-powered analysis and discover patterns in your subconscious mind.
 
 ## Features
