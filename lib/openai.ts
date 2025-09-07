@@ -33,6 +33,11 @@ export async function interpretDream(dreamDescription: string, moodTags: string[
     return 'Dream interpretation will be available at runtime.';
   }
 
+  // Validate input
+  if (!dreamDescription || dreamDescription.trim().length === 0) {
+    throw new Error('Dream description is required');
+  }
+
   try {
     const moodContext = moodTags.length > 0 ? `The dreamer's mood was: ${moodTags.join(', ')}.` : '';
     
@@ -76,6 +81,11 @@ export async function analyzePatterns(dreams: any[]): Promise<string> {
   // During build time, return a placeholder
   if (typeof window === 'undefined') {
     return 'Pattern analysis will be available at runtime.';
+  }
+
+  // Validate input
+  if (!dreams || dreams.length === 0) {
+    throw new Error('At least one dream is required for pattern analysis');
   }
 
   try {
