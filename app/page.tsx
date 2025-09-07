@@ -48,6 +48,8 @@ export default function DreamWeaverApp() {
       setCurrentView('dreams');
     } catch (error) {
       console.error('Error interpreting dream:', error);
+      // In production, you might want to show a user-friendly error message
+      // For now, we'll just log the error and continue
     } finally {
       setIsInterpreting(false);
     }
@@ -89,6 +91,8 @@ export default function DreamWeaverApp() {
       setPatterns(mockPatterns);
     } catch (error) {
       console.error('Error analyzing patterns:', error);
+      // In production, you might want to show a user-friendly error message
+      // For now, we'll just log the error and continue
     } finally {
       setIsAnalyzing(false);
     }
