@@ -6,21 +6,33 @@ function getOpenAIClient(): OpenAI {
   if (!openai) {
     const apiKey = process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
     
-    if (!apiKey) {
+    // During build time, we don't need a real API key
+    if (!apiKey && typeof window === 'undefined') {
+      openai = new OpenAI({
+        apiKey: 'build-time-placeholder',
+        baseURL: "https://openrouter.ai/api/v1",
+        dangerouslyAllowBrowser: true,
+      });
+    } else if (!apiKey) {
       throw new Error('OpenAI API key is required. Please set OPENAI_API_KEY or OPENROUTER_API_KEY environment variable.');
+    } else {
+      openai = new OpenAI({
+        apiKey,
+        baseURL: process.env.OPENROUTER_API_KEY ? "https://openrouter.ai/api/v1" : undefined,
+        dangerouslyAllowBrowser: true,
+      });
     }
-    
-    openai = new OpenAI({
-      apiKey,
-      baseURL: process.env.OPENROUTER_API_KEY ? "https://openrouter.ai/api/v1" : undefined,
-      dangerouslyAllowBrowser: true,
-    });
   }
   
   return openai;
 }
 
 export async function interpretDream(dreamDescription: string, moodTags: string[] = []): Promise<string> {
+  // During build time, return a placeholder
+  if (typeof window === 'undefined') {
+    return 'Dream interpretation will be available at runtime.';
+  }
+
   try {
     const moodContext = moodTags.length > 0 ? `The dreamer's mood was: ${moodTags.join(', ')}.` : '';
     
@@ -61,6 +73,11 @@ Keep the response concise but insightful (200-300 words).`;
 }
 
 export async function analyzePatterns(dreams: any[]): Promise<string> {
+  // During build time, return a placeholder
+  if (typeof window === 'undefined') {
+    return 'Pattern analysis will be available at runtime.';
+  }
+
   try {
     const dreamSummaries = dreams.map(d => `"${d.description}" (mood: ${d.moodTags.join(', ')})`).join('\n');
     
