@@ -1,12 +1,49 @@
 import OpenAI from 'openai';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY,
-  baseURL: "https://openrouter.ai/api/v1",
-  dangerouslyAllowBrowser: true,
-});
+let openai: OpenAI | null = null;
+
+function getOpenAIClient(): OpenAI {
+  if (!openai) {
+    const apiKey = process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
+    
+    // During build time or server-side rendering, we don't need a real API key
+    if (!apiKey && (typeof window === 'undefined' || process.env.NODE_ENV === 'production')) {
+      openai = new OpenAI({
+        apiKey: 'build-time-placeholder',
+        baseURL: "https://openrouter.ai/api/v1",
+        dangerouslyAllowBrowser: true,
+      });
+    } else if (!apiKey) {
+      // In development, provide a more helpful error message
+      console.warn('OpenAI API key not found. Please set OPENAI_API_KEY or OPENROUTER_API_KEY environment variable.');
+      openai = new OpenAI({
+        apiKey: 'development-placeholder',
+        baseURL: "https://openrouter.ai/api/v1",
+        dangerouslyAllowBrowser: true,
+      });
+    } else {
+      openai = new OpenAI({
+        apiKey,
+        baseURL: process.env.OPENROUTER_API_KEY ? "https://openrouter.ai/api/v1" : undefined,
+        dangerouslyAllowBrowser: true,
+      });
+    }
+  }
+  
+  return openai;
+}
 
 export async function interpretDream(dreamDescription: string, moodTags: string[] = []): Promise<string> {
+  // During build time or server-side rendering, return a placeholder
+  if (typeof window === 'undefined' || process.env.NODE_ENV === 'test') {
+    return 'Dream interpretation will be available at runtime.';
+  }
+
+  // Validate input
+  if (!dreamDescription || dreamDescription.trim().length === 0) {
+    throw new Error('Dream description is required for interpretation.');
+  }
+
   try {
     const moodContext = moodTags.length > 0 ? `The dreamer's mood was: ${moodTags.join(', ')}.` : '';
     
@@ -23,7 +60,7 @@ Please provide:
 
 Keep the response concise but insightful (200-300 words).`;
 
-    const completion = await openai.chat.completions.create({
+    const completion = await getOpenAIClient().chat.completions.create({
       model: 'google/gemini-2.0-flash-001',
       messages: [
         {
@@ -47,6 +84,16 @@ Keep the response concise but insightful (200-300 words).`;
 }
 
 export async function analyzePatterns(dreams: any[]): Promise<string> {
+  // During build time or server-side rendering, return a placeholder
+  if (typeof window === 'undefined' || process.env.NODE_ENV === 'test') {
+    return 'Pattern analysis will be available at runtime.';
+  }
+
+  // Validate input
+  if (!dreams || dreams.length === 0) {
+    throw new Error('At least one dream is required for pattern analysis.');
+  }
+
   try {
     const dreamSummaries = dreams.map(d => `"${d.description}" (mood: ${d.moodTags.join(', ')})`).join('\n');
     
@@ -63,7 +110,7 @@ Please identify:
 
 Keep the analysis insightful and supportive (250-350 words).`;
 
-    const completion = await openai.chat.completions.create({
+    const completion = await getOpenAIClient().chat.completions.create({
       model: 'google/gemini-2.0-flash-001',
       messages: [
         {

@@ -72,11 +72,18 @@ const config: Config = {
           4: "var(--chart-4)",
           5: "var(--chart-5)",
         },
+        // Dream-specific colors
+        'dream-blue': 'hsl(220 60% 60%)',
+        'dream-purple': 'hsl(260 60% 70%)',
+        'dream-teal': 'hsl(180 70% 55%)',
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      boxShadow: {
+        'card': '0 8px 24px hsla(210, 40%, 50%, 0.12)',
       },
       keyframes: {
         "accordion-down": {
