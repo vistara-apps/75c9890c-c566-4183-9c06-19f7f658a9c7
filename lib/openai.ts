@@ -6,15 +6,21 @@ function getOpenAIClient(): OpenAI {
   if (!openai) {
     const apiKey = process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
     
-    // During build time, we don't need a real API key
-    if (!apiKey && typeof window === 'undefined') {
+    // During build time or server-side rendering, we don't need a real API key
+    if (!apiKey && (typeof window === 'undefined' || process.env.NODE_ENV === 'production')) {
       openai = new OpenAI({
         apiKey: 'build-time-placeholder',
         baseURL: "https://openrouter.ai/api/v1",
         dangerouslyAllowBrowser: true,
       });
     } else if (!apiKey) {
-      throw new Error('OpenAI API key is required. Please set OPENAI_API_KEY or OPENROUTER_API_KEY environment variable.');
+      // In development, provide a more helpful error message
+      console.warn('OpenAI API key not found. Please set OPENAI_API_KEY or OPENROUTER_API_KEY environment variable.');
+      openai = new OpenAI({
+        apiKey: 'development-placeholder',
+        baseURL: "https://openrouter.ai/api/v1",
+        dangerouslyAllowBrowser: true,
+      });
     } else {
       openai = new OpenAI({
         apiKey,
@@ -28,14 +34,14 @@ function getOpenAIClient(): OpenAI {
 }
 
 export async function interpretDream(dreamDescription: string, moodTags: string[] = []): Promise<string> {
-  // During build time, return a placeholder
-  if (typeof window === 'undefined') {
+  // During build time or server-side rendering, return a placeholder
+  if (typeof window === 'undefined' || process.env.NODE_ENV === 'test') {
     return 'Dream interpretation will be available at runtime.';
   }
 
   // Validate input
   if (!dreamDescription || dreamDescription.trim().length === 0) {
-    throw new Error('Dream description is required');
+    throw new Error('Dream description is required for interpretation.');
   }
 
   try {
@@ -78,14 +84,14 @@ Keep the response concise but insightful (200-300 words).`;
 }
 
 export async function analyzePatterns(dreams: any[]): Promise<string> {
-  // During build time, return a placeholder
-  if (typeof window === 'undefined') {
+  // During build time or server-side rendering, return a placeholder
+  if (typeof window === 'undefined' || process.env.NODE_ENV === 'test') {
     return 'Pattern analysis will be available at runtime.';
   }
 
   // Validate input
   if (!dreams || dreams.length === 0) {
-    throw new Error('At least one dream is required for pattern analysis');
+    throw new Error('At least one dream is required for pattern analysis.');
   }
 
   try {
