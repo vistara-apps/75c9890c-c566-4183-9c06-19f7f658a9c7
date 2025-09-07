@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Moon, Sparkles, Tag } from 'lucide-react';
-import { MOOD_TAGS, type MoodTag } from '@/lib/types';
+import { MOOD_TAGS } from '@/lib/types';
 
 interface DreamInputFormProps {
   onSubmit: (description: string, moodTags: string[]) => void;

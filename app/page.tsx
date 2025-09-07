@@ -9,7 +9,7 @@ import { ThemeCard } from '@/components/ThemeCard';
 import { WalletConnect } from '@/components/WalletConnect';
 import { interpretDream, analyzePatterns } from '@/lib/openai';
 import { saveDream, getDreams, generateId } from '@/lib/utils';
-import { Moon, Brain, TrendingUp, Sparkles, Plus, History } from 'lucide-react';
+import { Moon, Brain, TrendingUp, Sparkles, Plus } from 'lucide-react';
 
 type ViewType = 'home' | 'dreams' | 'patterns' | 'settings';
 
@@ -59,7 +59,7 @@ export default function DreamWeaverApp() {
     setIsAnalyzing(true);
     
     try {
-      const analysis = await analyzePatterns(dreams);
+      await analyzePatterns(dreams);
       
       // Generate mock patterns based on dreams
       const mockPatterns = [
@@ -251,7 +251,7 @@ export default function DreamWeaverApp() {
         <div className="glass-card p-8 text-center">
           <Brain className="w-16 h-16 text-gray-400 mx-auto mb-4" />
           <h3 className="text-lg font-semibold text-white mb-2">Ready to Analyze</h3>
-          <p className="text-gray-300 mb-4">Click "Analyze" to discover patterns in your dreams</p>
+          <p className="text-gray-300 mb-4">Click &quot;Analyze&quot; to discover patterns in your dreams</p>
         </div>
       ) : (
         <div className="space-y-4">
